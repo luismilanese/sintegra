@@ -11,13 +11,28 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class ConsultController
+ * @package App\Http\Controllers
+ */
 class ConsultController extends Controller
 {
+    /**
+     * ConsultController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth', ['except' => ['index']]);
     }
 
+    /**
+     * Retorna o resultado do Sintegra ao CNPJ informado.
+     *
+     * @param Request $request
+     * @param Sintegra $sintegra
+     * @param SintegraModel $sintegraModel
+     * @return Response
+     */
     public function search(Request $request, Sintegra $sintegra, SintegraModel $sintegraModel)
     {
         $searchResult = null;
@@ -43,6 +58,13 @@ class ConsultController extends Controller
         return view('consult.search', compact('searchResult'));
     }
 
+    /**
+     * Realiza uma consulta ao serviço do Sintegra.
+     *
+     * @param string $cnpj
+     * @param Sintegra $sintegra
+     * @return Response
+     */
     public function consult($cnpj, Sintegra $sintegra)
     {
         $response = $sintegra->consult($cnpj, DocumentType::CNPJ);
@@ -52,6 +74,11 @@ class ConsultController extends Controller
         return response()->json($response);
     }
 
+    /**
+     * Lista as buscas realizadas.
+     *
+     * @return Response
+     */
     public function results()
     {
         $results = SintegraModel::all();
@@ -59,6 +86,12 @@ class ConsultController extends Controller
         return view('consult.results', compact('results'));
     }
 
+    /**
+     * Exibe o resultado de uma busca gravada no banco.
+     *
+     * @param int $id
+     * @return Response
+     */
     public function showResult($id)
     {
         $searchResult = SintegraModel::find($id)->resultado_json;

@@ -5,6 +5,10 @@ namespace App\Services;
 use App\DataTypes\DocumentType;
 use GuzzleHttp\Client;
 
+/**
+ * Class Sintegra
+ * @package App\Services
+ */
 class Sintegra implements SintegraInterface
 {
     protected $client;
@@ -43,7 +47,7 @@ class Sintegra implements SintegraInterface
 
     /**
      * Faz o parse do resultado.
-     * 
+     *
      * @param string $body
      * @return string
      */
