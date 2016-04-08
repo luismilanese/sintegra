@@ -1,0 +1,20 @@
+body {
+    padding-top: 60px;
+}
+
+div.results-show {
+    border: #ccc solid 1px;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+div.results-show h2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+div.results-show p.record-not-found {
+    font-weight: bold;
+    text-align: center;
+}
